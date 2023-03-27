@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata: 
+  name: migration-job
+spec:
+  template:
+    metadata:
+      name: migration
+    spec:
+      containers:
+      - name: migration
+        image: khushalmer/myimg2
+        command: ["php", "artisan", "migrate"]
+      restartPolicy: Never

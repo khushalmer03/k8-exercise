@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: notdb
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 3306
+    targetPort: 3306
+  selector:
+    db: mysql
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    db: mysql
+spec:
+  selector:
+    matchLabels:
+      db: mysql
+  template:
+    metadata:
+      name: sqltemplate
+      labels:
+        db: mysql
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: sqlcontainer
+        ports:
+        - containerPort: 3306
+        # envFrom:
+        # - secretRef:
+        #     name: dbsecret
+        env:
+        #   - name: MYSQL_ROOT_PASSWORD
+        #     value: forge
+          - name: DB_HOST
+            value: notdb
+          - name: MYSQL_DATABASE
+            value: forge
+          - name: MYSQL_USER
+            value: forge
+          - name: MYSQL_PASSWORD
+            value: forge   
+
+          - name: MYSQL_ROOT_PASSWORD
+          # value: forge
+            valueFrom:
+              secretKeyRef:
+                name: dbsecret
+                key: MYSQL_ROOT_PASSWORD
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: local-vol
+  volumeClaimTemplates:
+    - metadata:
+        name: local-vol
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "local-path"
+        resources:
+          requests:
+            storage: 1Gi
