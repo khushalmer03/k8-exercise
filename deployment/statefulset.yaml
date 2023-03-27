@@ -40,7 +40,7 @@ spec:
         #   - name: MYSQL_ROOT_PASSWORD
         #     value: forge
           - name: DB_HOST
-            value: notdb
+            value: db
           - name: MYSQL_DATABASE
             value: forge
           - name: MYSQL_USER
