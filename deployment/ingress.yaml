@@ -3,22 +3,22 @@ kind: Ingress
 metadata: 
   name: ingress
 spec:
-  # ingressClassName: traefik
-  # rules:
-  # - host: dashboard.com
-  #   http:
-  #     paths:
-  #     - path: /
-  #       pathType: Exact  
-  #       backend:
-  #         service:
-  #           name: appservice
-  #           port: 
-  #             number: 80
+  ingressClassName: traefik
+  rules:
+  - host: dashboard.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix 
+        backend:
+          service:
+            name: appservice
+            port: 
+              number: 80
 
 
-  defaultBackend:
-    service:
-      name: appservice 
-      port:
-        number: 80
+  # defaultBackend:
+  #   service:
+  #     name: appservice 
+  #     port:
+  #       number: 80
