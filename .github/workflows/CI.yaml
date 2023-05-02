@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:v2
+        tags: khushalmer/myimg:{{branch}}-{{sha}}-{{date 'X'}}
