@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:main-${{ steps.commit.outputs.short }}
+        tags: khushalmer/myimg:main-${{ github.sha }}-${{ github.event_time }}
