@@ -27,4 +27,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:main-${{ SHORT_SHA }}
+        tags: khushalmer/myimg:main-${{ GITHUB_ENV }}
