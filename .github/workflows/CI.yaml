@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:main-${{ github.sha:0:7}}-$(date +%s)
+        tags: khushalmer/myimg:main-${GITHUB_SHA:0:7}-$(date +%s)
