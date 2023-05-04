@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:main-${{ github.sha }}-${{ github.event_time }}
+        tags: khushalmer/myimg:main-$(echo "${{ github.sha }}" | cut -c1-7)
