@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:main-${{ steps.meta.outputs.tags }}
+        tags: khushalmer/myimg:main-${{ steps.commit.outputs.short }}
