@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: khushalmer/myimg:main-${{ GITHUB_SHA::8 }}
+        tags: khushalmer/myimg:main-$(echo ${GITHUB_SHA} | cut -c1-8)
