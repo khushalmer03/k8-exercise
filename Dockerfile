@@ -1,10 +1,6 @@
 FROM frappe/erpnext:latest
 
-ENV GIT_USER=khushalmer03
-
-ENV GIT_AUTH_TOKEN=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
-
-RUN bench get-app https://khushalmer03:${GIT_AUTH_TOKEN}@github.com/Improwised/apricot-3.git
+RUN bench get-app https://khushalmer03:${secrets.GIT_AUTH_TOKEN}@github.com/Improwised/apricot-3.git
 
 
 
