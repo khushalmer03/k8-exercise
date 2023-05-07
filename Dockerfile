@@ -15,7 +15,7 @@ USER frappe
 
 WORKDIR /home/frappe/frappe-bench
 
-RUN bench get-app git@github.com:khushalmer03/demo.git
+RUN bench get-app git@github.com:khushalmer03/demo.git 
 
 # FROM frappe/erpnext:latest
 
