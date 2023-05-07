@@ -2,14 +2,14 @@ FROM frappe/erpnext:latest
 
 USER root
 WORKDIR /home/frappe
-RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 755 home/frappe/.ssh
+RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 755 /home/frappe/.ssh
 
 COPY .ssh/id_rsa /home/frappe/.ssh/id_rsa 
 
 RUN chmod 600 /home/frappe/.ssh/id_rsa 
 
 RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
-RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh && chown frappe:frappe .ssh/id_rsa .ssh/known_hosts 
+RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh && chown frappe:frappe .ssh/id_rsa .ssh/known_hosts 
 
 USER frappe
 
