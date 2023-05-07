@@ -2,7 +2,13 @@ FROM frappe/erpnext:latest
 
 ENV GIT_USER=khushalmer03
 
-ENV GIT_AUTH_TOKEN=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
+ENV GIT_AUTH_TOKEN=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
+
+RUN bench get-app https://khushalmer03:${GIT_AUTH_TOKEN}@github.com/Improwised/apricot-3.git
+
+
+
+
 # USER root
 # RUN apt-get update && apt-get -y upgrade
 # RUN apt-get install -y openssh-client
@@ -17,4 +23,3 @@ ENV GIT_AUTH_TOKEN=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
 
 # RUN bench get-app --branch version-14 payments
 
-RUN bench get-app https://khushalmer03:${GIT_AUTH_TOKEN}@github.com/Improwised/apricot-3.git
