@@ -26,8 +26,8 @@ jobs:
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v4
-      with:
-        images: name/app
+      # with:
+      #   images: name/app
     
     - name: Get Epoch
       id: epoch
