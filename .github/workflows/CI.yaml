@@ -26,8 +26,8 @@ jobs:
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v4
-      # with:
-      #   images: name/app
+      with:
+        images: khushalmer/myimg
     
     - name: Get Epoch
       id: epoch
@@ -39,4 +39,4 @@ jobs:
         context: .
         push: true
         # tags: main-j949ej-203840
-        tags: khushalmer/myimg:${{ steps.meta.outputs.tags }}-${{ steps.vars.outputs.sha_short }}-${{ steps.epoch.outputs.epoch }}
+        tags: ${{ steps.meta.outputs.tags }}-${{ steps.vars.outputs.sha_short }}-${{ steps.epoch.outputs.epoch }}
