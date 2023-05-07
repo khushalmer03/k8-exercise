@@ -17,4 +17,4 @@ ENV GIT_AUTH_TOKEN=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
 
 # RUN bench get-app --branch version-14 payments
 
-RUN bench get-app https://${GIT_USER}:${GIT_AUTH_TOKEN}@github.com/Improwised/apricot-3.git
+RUN bench get-app https://khushalmer03:${GIT_AUTH_TOKEN}@github.com/Improwised/apricot-3.git
