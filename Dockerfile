@@ -6,6 +6,8 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 
 COPY .ssh/id_rsa /home/frappe/.ssh/id_rsa 
 
+RUN chmod 644 /home/frappe/.ssh/id_rsa
+
 RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa && ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh && chown frappe:frappe .ssh/id_rsa .ssh/known_hosts 
 
 USER frappe
