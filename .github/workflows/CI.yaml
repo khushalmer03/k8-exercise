@@ -28,5 +28,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ github.ref }}-${{ github.sha }}-$(date +%Y%m%d%H%M%S)
+        tags: main-j949ej-203840
         # tags: khushalmer/myimg:develop-${{ steps.vars.outputs.sha_short }}
