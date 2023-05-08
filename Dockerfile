@@ -7,9 +7,13 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 # ARG DEPLOY_PRIVATE_KEY
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 
+# RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
+#     export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && \
+#     cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
+
 RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
-    export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && \
-    cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
+    cat /run/secrets/DEPLOY_PRIVATE_KEY >> .ssh/id_rsa 
+
 
 RUN chmod 600 /home/frappe/.ssh/id_rsa 
 
