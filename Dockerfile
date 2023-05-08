@@ -4,15 +4,17 @@ USER root
 WORKDIR /home/frappe
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
 
-COPY root-config /root/
-RUN sed 's|/home/runner|/root|g' -i.bak /root/.ssh/config
+# COPY root-config /root/
+# RUN sed 's|/home/runner|/root|g' -i.bak /root/.ssh/config
 # ARG DEPLOY_PRIVATE_KEY
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 
-# RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
+RUN --mount=type=ssh,id=DEPLOY_PRIVATE_KEY 
 #     export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && \
 #     cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
 RUN git clone git@github.com:khushalmer03/demo.git   
+
+RUN mkdir -p -m 0600 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 # RUN --mount=type=bind,id=DEPLOY_PRIVATE_KEY 
 # RUN echo 
