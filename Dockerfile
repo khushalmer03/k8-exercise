@@ -15,9 +15,9 @@ USER frappe
 
 WORKDIR /home/frappe/frappe-bench
 
-RUN RUN bench get-app --branch version-14 hrms
+RUN bench get-app --branch version-14 hrms
 
-RUN RUN bench get-app --branch version-14 payments
+RUN bench get-app --branch version-14 payments
 
 RUN bench get-app --branch develop git@github.com:khushalmer03/demo.git 
 
