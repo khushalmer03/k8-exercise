@@ -4,7 +4,8 @@ USER root
 WORKDIR /home/frappe
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 755 /home/frappe/.ssh
 
-COPY .ssh/id_rsa /home/frappe/.ssh/id_rsa 
+
+COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 
 RUN chmod 600 /home/frappe/.ssh/id_rsa 
 
@@ -20,6 +21,8 @@ RUN bench get-app --branch version-14 hrms
 RUN bench get-app --branch version-14 payments
 
 RUN bench get-app git@github.com:khushalmer03/demo.git 
+
+RUN bench get-app bench get-app --branch v13 https://github.com/Improwised/frappe_s3_attachment.git
 
 
 # FROM frappe/erpnext:latest
