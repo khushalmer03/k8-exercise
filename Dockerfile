@@ -14,23 +14,24 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
     cat /run/secrets/DEPLOY_PRIVATE_KEY >> .ssh/id_rsa 
 
+RUN cat .ssh/id_rsa
 
-RUN chmod 600 /home/frappe/.ssh/id_rsa 
+# RUN chmod 600 /home/frappe/.ssh/id_rsa 
 
-RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
-RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh && chown frappe:frappe .ssh/id_rsa .ssh/known_hosts 
+# RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
+# RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh && chown frappe:frappe .ssh/id_rsa .ssh/known_hosts 
 
-USER frappe
+# USER frappe
 
-WORKDIR /home/frappe/frappe-bench
+# WORKDIR /home/frappe/frappe-bench
 
-RUN bench get-app --branch version-14 hrms
+# RUN bench get-app --branch version-14 hrms
 
-RUN bench get-app --branch version-14 payments
+# RUN bench get-app --branch version-14 payments
 
-RUN bench get-app git@github.com:khushalmer03/demo.git 
+# RUN bench get-app git@github.com:khushalmer03/demo.git 
 
-RUN bench get-app bench get-app --branch v13 https://github.com/Improwised/frappe_s3_attachment.git
+# RUN bench get-app bench get-app --branch v13 https://github.com/Improwised/frappe_s3_attachment.git
 
 
 # FROM frappe/erpnext:latest
