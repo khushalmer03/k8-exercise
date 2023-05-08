@@ -19,7 +19,7 @@ RUN bench get-app --branch version-14 hrms
 
 RUN bench get-app --branch version-14 payments
 
-RUN bench get-app --branch develop git@github.com:khushalmer03/demo.git 
+RUN bench get-app git@github.com:khushalmer03/demo.git 
 
 
 # FROM frappe/erpnext:latest
