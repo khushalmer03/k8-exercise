@@ -5,7 +5,7 @@ WORKDIR /home/frappe
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
 # ARG GIT_AUTH_TOKEN
 COPY root-config /home/
-RUN sed 's|/home/runner|/root|g' -i.bak /home/root-config/.ssh/config
+RUN sed 's|/home/runner|/home/|g' -i.bak /home/.ssh/config
 # ARG DEPLOY_PRIVATE_KEY
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 # RUN mkdir /home/.ssh && \
