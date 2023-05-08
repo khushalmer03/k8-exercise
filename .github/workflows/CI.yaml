@@ -12,9 +12,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - uses: webfactory/ssh-agent@v0.7.0
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+    # - uses: webfactory/ssh-agent@v0.7.0
+    #   with:
+    #     ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
     - name: Login to Docker Hub
       uses: docker/login-action@v1
@@ -42,4 +42,4 @@ jobs:
         context: .
         push: true
         tags: khushalmer/myimg:develop-${{ steps.vars.outputs.sha_short }}-${{ steps.epoch.outputs.epoch }}
-        ssh: default=${{ env.SSH_AUTH_SOCK }}
+        # ssh: default=${{ env.SSH_AUTH_SOCK }}
