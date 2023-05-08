@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
 #     export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && \
 #     cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
-RUN touch /hom/frappe/please
+RUN touch /home/frappe/please
 RUN --mount=type=bind,id=DEPLOY_PRIVATE_KEY \
     cat /run/secrets/DEPLOY_PRIVATE_KEY >> /home/frappe/please
 
