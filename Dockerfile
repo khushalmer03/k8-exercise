@@ -4,7 +4,7 @@ USER root
 WORKDIR /home/frappe
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 755 /home/frappe/.ssh
 
-
+ARG DEPLOY_PRIVATE_KEY
 COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 
 RUN chmod 600 /home/frappe/.ssh/id_rsa 
