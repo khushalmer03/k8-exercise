@@ -1,4 +1,4 @@
-FROM frappe/erpnext:latest
+FROM frappe/erpnext:v14.23.4
 
 USER root
 WORKDIR /home/frappe
@@ -15,7 +15,12 @@ USER frappe
 
 WORKDIR /home/frappe/frappe-bench
 
-RUN bench get-app git@github.com:khushalmer03/demo.git 
+RUN RUN bench get-app --branch version-14 hrms
+
+RUN RUN bench get-app --branch version-14 payments
+
+RUN bench get-app --branch develop git@github.com:khushalmer03/demo.git 
+
 
 # FROM frappe/erpnext:latest
 
