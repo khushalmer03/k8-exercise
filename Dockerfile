@@ -3,18 +3,23 @@ FROM frappe/erpnext:v14.23.4
 USER root
 WORKDIR /home/frappe
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
-
+ARG GIT_AUTH_TOKEN
 # COPY root-config /root/
 # RUN sed 's|/home/runner|/root|g' -i.bak /root/.ssh/config
 # ARG DEPLOY_PRIVATE_KEY
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
-
-RUN --mount=type=ssh,id=DEPLOY_PRIVATE_KEY 
+RUN mkdir /home/.ssh && \
+    echo "StrictHostKeyChecking no " > /home/.ssh/config && \
+    chmod 400 /home/.ssh/config && \
+    ssh-keyscan github.com >> /home/.ssh/known_hosts && \
+    git config --global credential.helper 'store --file /home/.git-credentials' && \
+    echo "https://$GIT_AUTH_TOKEN:x-oauth-basic@github.com" > /home/.git-credentials
+# RUN --mount=type=ssh,id=DEPLOY_PRIVATE_KEY 
 #     export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && \
 #     cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
 RUN git clone git@github.com:khushalmer03/demo.git   
 
-RUN mkdir -p -m 0600 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts
+# RUN mkdir -p -m 0600 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 # RUN --mount=type=bind,id=DEPLOY_PRIVATE_KEY 
 # RUN echo 
