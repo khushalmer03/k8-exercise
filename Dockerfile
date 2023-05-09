@@ -3,7 +3,7 @@ FROM frappe/erpnext:v14.23.4
 USER root
 WORKDIR /home/frappe
 # apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && 
-RUN mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
+RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
 # ARG GIT_AUTH_TOKEN
 # COPY root-config /home/
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
