@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
 ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
-RUN touch id_rsa && chown frappe:frappe && chmod 600
+RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
 
 RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/id_rsa
 
