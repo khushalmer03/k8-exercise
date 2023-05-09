@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
 ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
-RUN eval $(ssh-agent -s) && ssh-add DEPLOY_PRIVATE_KEY
+RUN eval $(ssh-agent -s) && ssh-add $DEPLOY_PRIVATE_KEY
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 # RUN mkdir /home/.ssh && \
 #     echo "StrictHostKeyChecking no " > /home/.ssh/config && \
