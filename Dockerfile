@@ -7,6 +7,8 @@ WORKDIR /home/frappe
 # COPY root-config /home/
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
+ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
+RUN cat $DEPLOY_PRIVATE_KEY
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 # RUN mkdir /home/.ssh && \
 #     echo "StrictHostKeyChecking no " > /home/.ssh/config && \
@@ -14,8 +16,8 @@ ARG DEPLOY_PRIVATE_KEY
 #     ssh-keyscan github.com >> /home/.ssh/known_hosts && \
 #     git config --global credential.helper 'store --file /home/.git-credentials' && \
 #     echo "https://$GIT_AUTH_TOKEN:x-oauth-basic@github.com" > /home/.git-credentials
-RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY
-RUN export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && cat $DEPLOY_PRIVATE_KEY
+# RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY
+# RUN export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && cat $DEPLOY_PRIVATE_KEY
 # cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
 # RUN git clone git@github.com:khushalmer03/demo.git   
 
