@@ -12,15 +12,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - uses: webfactory/ssh-agent@v0.7.0
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+    # - uses: webfactory/ssh-agent@v0.7.0
+    #   with:
+    #     ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
-    - name: create ssh folder 
-      run: mkdir -p ~/.ssh && chmod 700 ~/.ssh 
+    # - name: create ssh folder 
+    #   run: mkdir -p ~/.ssh && chmod 700 ~/.ssh 
 
-    - name: create private key 
-      run: echo "${{ secrets.DEPLOY_PRIVATE_KEY }}" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
+    # - name: create private key 
+    #   run: echo "${{ secrets.DEPLOY_PRIVATE_KEY }}" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
     
     # - name: Prepare Key
     #   uses: webfactory/ssh-agent@v0.5.4
@@ -56,17 +56,17 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        volumes:
-          ~/.ssh:/home/frappe/.ssh
+        # volumes:
+        #   ~/.ssh:/home/frappe/.ssh
         push: true
         tags: khushalmer/myimg:develop
         # -${{ steps.vars.outputs.sha_short }}-${{ steps.epoch.outputs.epoch }}
         # ssh: default=${{ env.SSH_AUTH_SOCK }}
-        ssh: |
-          default=${{ env.SSH_AUTH_SOCK }}
-        secrets: |
-          "DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}"
+        # ssh: |
+        #   default=${{ env.SSH_AUTH_SOCK }}
+        # secrets: |
+        #   "DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}"
         build-args: |
-            DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}
+            FRAPPE_TOKEN=${{ secrets.FRAPPE_TOKEN }}
       # env:
       #   GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}
