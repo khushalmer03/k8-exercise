@@ -7,14 +7,15 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 # COPY root-config /home/
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
-ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
-# RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
+ENV DEPLOY_PRIVATE_KEY ${{ secrets.DEPLOY_PRIVATE_KEY }}
+RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/id_rsa
 # RUN cat .ssh/id_rsa
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
 #     cat /run/secrets/DEPLOY_PRIVATE_KEY
 # RUN echo ${DEPLOY_PRIVATE_KEY}
-
+RUN cat ${{ secrets.DEPLOY_PRIVATE_KEY }} >> .ssh/id_rsa
+RUN cat .ssh/id_rsa
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
@@ -27,7 +28,7 @@ ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY
 # RUN export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && cat $DEPLOY_PRIVATE_KEY
 # cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
-RUN git clone git@github.com:khushalmer03/demo.git   
+# RUN git clone git@github.com:khushalmer03/demo.git   
 
 # RUN mkdir -p -m 0600 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
