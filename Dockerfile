@@ -17,6 +17,7 @@ RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rs
 # RUN echo ${DEPLOY_PRIVATE_KEY}
 RUN $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 RUN cat .ssh/id_rsa
+
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
