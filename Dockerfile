@@ -2,12 +2,13 @@ FROM frappe/erpnext:v14.23.4
 
 USER root
 WORKDIR /home/frappe
-RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
+# apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && 
+RUN mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
 # ARG GIT_AUTH_TOKEN
 # COPY root-config /home/
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
-ENV DEPLOY_PRIVATE_KEY ${secrets.DEPLOY_PRIVATE_KEY}
+# ENV DEPLOY_PRIVATE_KEY ${secrets.DEPLOY_PRIVATE_KEY}
 RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/id_rsa
 # RUN cat .ssh/id_rsa
