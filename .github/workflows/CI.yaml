@@ -56,9 +56,9 @@ jobs:
         # ssh: default=${{ env.SSH_AUTH_SOCK }}
         ssh: |
           default=${{ env.SSH_AUTH_SOCK }}
-        # secrets: |
-        #   "DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}"
-        # build-args: |
-        #     BUILDKIT_PROGRESS=plain
+        secrets: |
+          "DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}"
+        build-args: |
+            DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}
       # env:
       #   GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}
