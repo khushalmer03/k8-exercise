@@ -21,10 +21,10 @@ jobs:
     #   with:
     #     ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
-    - name: Collect Git and SSH config files in a directory that is part of the Docker build context
-      run: |
-        mkdir root-config
-        cp -r ~/.gitconfig  ~/.ssh root-config/
+    # - name: Collect Git and SSH config files in a directory that is part of the Docker build context
+    #   run: |
+    #     mkdir root-config
+    #     cp -r ~/.gitconfig  ~/.ssh root-config/
 
     - name: Login to Docker Hub
       uses: docker/login-action@v1
@@ -55,6 +55,6 @@ jobs:
         # -${{ steps.vars.outputs.sha_short }}-${{ steps.epoch.outputs.epoch }}
         # ssh: default=${{ env.SSH_AUTH_SOCK }}
         ssh: |
-          default=${{ env.SSH_AUTH_SOCK }}
+          DEPLOY_PRIVATE_KEY=${{ secrets.DEPLOY_PRIVATE_KEY }}
       # env:
       #   GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}
