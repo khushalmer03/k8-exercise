@@ -11,7 +11,7 @@ ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
 
 RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/
 
-RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
+RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 # RUN mkdir /home/.ssh && \
 #     echo "StrictHostKeyChecking no " > /home/.ssh/config && \
