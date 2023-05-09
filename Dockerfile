@@ -14,7 +14,8 @@ WORKDIR /home/frappe
 #     ssh-keyscan github.com >> /home/.ssh/known_hosts && \
 #     git config --global credential.helper 'store --file /home/.git-credentials' && \
 #     echo "https://$GIT_AUTH_TOKEN:x-oauth-basic@github.com" > /home/.git-credentials
-RUN --mount=type=ssh,id=DEPLOY_PRIVATE_KEY && export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && cat $DEPLOY_PRIVATE_KEY
+RUN --mount=type=ssh,id=DEPLOY_PRIVATE_KEY
+RUN export DEPLOY_PRIVATE_KEY=$(cat /run/secrets/DEPLOY_PRIVATE_KEY) && cat $DEPLOY_PRIVATE_KEY
 # cat $DEPLOY_PRIVATE_KEY >> /home/frappe/.ssh/id_rsa 
 # RUN git clone git@github.com:khushalmer03/demo.git   
 
