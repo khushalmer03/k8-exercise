@@ -20,7 +20,6 @@ RUN cat .ssh/id_rsa
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 
 
-
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 # RUN mkdir /home/.ssh && \
 #     echo "StrictHostKeyChecking no " > /home/.ssh/config && \
