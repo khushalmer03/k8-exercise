@@ -9,15 +9,16 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
 # ENV DEPLOY_PRIVATE_KEY ${secrets.DEPLOY_PRIVATE_KEY}
-RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
+# RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/id_rsa
 # RUN cat .ssh/id_rsa
 # RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
 #     cat /run/secrets/DEPLOY_PRIVATE_KEY
 # RUN echo ${DEPLOY_PRIVATE_KEY}
-RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
+# RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 RUN cat .ssh/id_rsa
-RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
+RUN eval $(ssh-agent -s) && ssh-add $DEPLOY_PRIVATE_KEY
+# ssh-add /home/frappe/.ssh/id_rsa
 RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh/known_hosts 
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 
