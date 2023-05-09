@@ -9,11 +9,11 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client &&
 ARG DEPLOY_PRIVATE_KEY
 ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
 RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rsa
-
-# RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/id_rsa
-RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
-    cat /run/secrets/DEPLOY_PRIVATE_KEY
-RUN echo ${DEPLOY_PRIVATE_KEY}
+RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY,target=/home/frappe/.ssh/id_rsa
+RUN cat .ssh/id_rsa
+# RUN --mount=type=secret,id=DEPLOY_PRIVATE_KEY \
+#     cat /run/secrets/DEPLOY_PRIVATE_KEY
+# RUN echo ${DEPLOY_PRIVATE_KEY}
 
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 
