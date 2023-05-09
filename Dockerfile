@@ -17,6 +17,8 @@ RUN touch .ssh/id_rsa && chown frappe:frappe .ssh/id_rsa && chmod 600 .ssh/id_rs
 # RUN echo ${DEPLOY_PRIVATE_KEY}
 RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 RUN cat .ssh/id_rsa
+RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
+RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh/known_hosts 
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 
 
@@ -44,8 +46,6 @@ RUN cat .ssh/id_rsa
 
 # RUN chmod 600 /home/frappe/.ssh/id_rsa 
 
-# RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
-# RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh && chown frappe:frappe .ssh/id_rsa .ssh/known_hosts 
 
 # USER frappe
 
