@@ -24,7 +24,7 @@ WORKDIR /home/frappe
 # RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 # RUN cat .ssh/id_rsa
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
-RUN git clone https://khushalmer03:${FRAPPE_TOKEN}@github.com/khushalmer03/k8-exercise 
+RUN git clone https://khushalmer03:${FRAPPE_TOKEN}@github.com/khushalmer03/demo 
 
 
 
