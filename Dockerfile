@@ -8,7 +8,7 @@ WORKDIR /home/frappe
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
 ARG DEPLOY_PRIVATE_KEY
 ENV DEPLOY_PRIVATE_KEY ${DEPLOY_PRIVATE_KEY}
-RUN export $DEPLOY_PRIVATE_KEY >> file.txt && cat file.txt
+RUN cat $DEPLOY_PRIVATE_KEY >> file.txt && cat file.txt
 # COPY DEPLOY_PRIVATE_KEY /home/frappe/.ssh/id_rsa 
 # RUN mkdir /home/.ssh && \
 #     echo "StrictHostKeyChecking no " > /home/.ssh/config && \
