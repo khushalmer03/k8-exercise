@@ -17,7 +17,7 @@ ARG DEPLOY_PRIVATE_KEY
 # RUN echo ${DEPLOY_PRIVATE_KEY}
 # RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 # RUN cat .ssh/id_rsa
-RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa/id_ed25519
+RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_ed25519
 RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh/known_hosts 
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 RUN git clone git@github.com:khushalmer03/demo.git   
