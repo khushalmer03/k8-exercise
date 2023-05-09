@@ -8,6 +8,7 @@ ARG FRAPPE_TOKEN
 FROM frappe/erpnext:v14.23.4
 USER root
 WORKDIR /home/frappe
+ENV FRAPPE_TOKEN=$FRAPPE_TOKEN
 # COPY --from=stage 
 # apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && 
 # RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client 
