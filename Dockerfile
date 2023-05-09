@@ -3,7 +3,7 @@ FROM frappe/erpnext:v14.23.4
 USER root
 WORKDIR /home/frappe
 # apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && 
-RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && mkdir /home/frappe/.ssh && chown frappe:frappe .ssh && chmod 777 /home/frappe/.ssh
+RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client 
 # ARG GIT_AUTH_TOKEN
 # COPY root-config /home/
 # RUN sed 's|/home/runner|/home|g' -i.bak /home/.ssh/config
@@ -17,11 +17,11 @@ ARG DEPLOY_PRIVATE_KEY
 # RUN echo ${DEPLOY_PRIVATE_KEY}
 # RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 # RUN cat .ssh/id_rsa
-RUN eval $(ssh-agent -s)
-# ssh-add /home/frappe/.ssh/id_rsa
+RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa/id_ed25519
 RUN ssh-keyscan github.com >> /home/frappe/.ssh/known_hosts && chmod 644 /home/frappe/.ssh/known_hosts && chown frappe:frappe .ssh/known_hosts 
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
 RUN git clone git@github.com:khushalmer03/demo.git   
+
 
 
 
