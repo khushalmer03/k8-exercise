@@ -4,7 +4,7 @@
 
 # RUN export .. \ &&
 #     git clone
-ARG FRAPPE_TOKEN
+# ARG FRAPPE_TOKEN
 FROM frappe/erpnext:v14.23.4
 ENV FRAPPE_TOKEN=$FRAPPE_TOKEN
 USER root
