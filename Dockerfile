@@ -1,11 +1,13 @@
 FROM frappe/erpnext:v14.23.4
+
+ARG GIT_USER
+
 ARG FRAPPE_TOKEN
-# ENV FRAPPE_TOKEN=$FRAPPE_TOKEN
-WORKDIR /home/frappe/frappe-bench
-RUN git clone https://khushalmer03:${FRAPPE_TOKEN}@github.com/khushalmer03/demo 
 
-USER root
-RUN unset FRAPPE_TOKEN
-
-USER frappe
 WORKDIR /home/frappe/frappe-bench
+
+RUN bench get-app --branch version-14 hrms
+
+RUN bench get-app --branch version-14 payments
+
+RUN bench get-app https://${GIT_USER}:${FRAPPE_TOKEN}@github.com/khushalmer03/demo 
