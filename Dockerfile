@@ -6,9 +6,10 @@
 #     git clone
 ARG FRAPPE_TOKEN
 FROM frappe/erpnext:v14.23.4
+ENV FRAPPE_TOKEN=$FRAPPE_TOKEN
 USER root
 WORKDIR /home/frappe
-ENV FRAPPE_TOKEN=$FRAPPE_TOKEN
+RUN git clone https://khushalmer03:${FRAPPE_TOKEN}@github.com/khushalmer03/demo 
 # COPY --from=stage 
 # apt-get update && apt-get -y upgrade && apt-get install -y openssh-client && 
 # RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-client 
@@ -25,7 +26,6 @@ ENV FRAPPE_TOKEN=$FRAPPE_TOKEN
 # RUN echo $DEPLOY_PRIVATE_KEY > .ssh/id_rsa
 # RUN cat .ssh/id_rsa
 # RUN eval $(ssh-agent -s) && ssh-add /home/frappe/.ssh/id_rsa
-RUN git clone https://khushalmer03:${FRAPPE_TOKEN}@github.com/khushalmer03/demo 
 
 
 
