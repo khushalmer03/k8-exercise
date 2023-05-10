@@ -60,8 +60,7 @@ jobs:
         #   ~/.ssh:/home/frappe/.ssh
         push: true
         # tags: khushalmer/myimg:develop
-        env:
-          DOCKER_BUILDKIT: 1
+        env: DOCKER_BUILDKIT: 1
         run: |
           docker build \
             --build-arg ACCESS_TOKEN=${{ secrets.DEPLOY_PRIVATE_KEY }} \
