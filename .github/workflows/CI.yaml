@@ -42,3 +42,146 @@ jobs:
         build-args: |
                 GIT_USER=${{ secrets.GIT_USER }}
                 FRAPPE_TOKEN=${{ secrets.FRAPPE_TOKEN }}
+    - name: Notify passed
+      if: ${{ success() }}
+      run: |
+        curl --location --request POST '${{ secrets.WEBHOOK_URL }}' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "attachments": [
+                {
+                  "mrkdwn_in": ["text"],
+                    "color": "#0d9488",
+                    "title": "${{ github.repository }} API CI passed",
+                    "title_link": "https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/${{github.run_id}}",
+                    "fields": [
+                        {
+                            "title": "Repository",
+                            "value": "${{ github.repository }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Ref",
+                            "value": "${{ github.ref_name }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Event Name",
+                            "value": "${{ github.event_name }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Commit",
+                            "value": "${{ github.event.head_commit.message }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Author",
+                            "value": "${{ github.actor }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Triggered By",
+                            "value": "${{ github.triggering_actor }}",
+                            "short": true
+                        }
+                    ]
+                }
+            ]
+        }'
+
+    - name: Notify failed
+      if: ${{ failure() }}
+      run: |
+        curl --location --request POST '${{ secrets.WEBHOOK_URL }}' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "attachments": [
+                {
+                  "mrkdwn_in": ["text"],
+                    "color": "#dc2626",
+                    "title": "${{ github.repository }} API CI failed",
+                    "title_link": "https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/${{github.run_id}}",
+                    "fields": [
+                        {
+                            "title": "Repository",
+                            "value": "${{ github.repository }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Ref",
+                            "value": "${{ github.ref_name }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Event Name",
+                            "value": "${{ github.event_name }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Commit",
+                            "value": "${{ github.event.head_commit.message }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Author",
+                            "value": "${{ github.actor }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Triggered By",
+                            "value": "${{ github.triggering_actor }}",
+                            "short": true
+                        }
+                    ]
+                }
+            ]
+        }'
+        
+    - name: Notify cancelled
+      if: ${{ cancelled() }}
+      run: |
+        curl --location --request POST '${{ secrets.WEBHOOK_URL }}' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "attachments": [
+                {
+                  "mrkdwn_in": ["text"],
+                    "color": "#ca8a04",
+                    "title": "${{ github.repository }} API CI cancelled",
+                    "title_link": "https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/${{github.run_id}}",
+                    "fields": [
+                        {
+                            "title": "Repository",
+                            "value": "${{ github.repository }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Ref",
+                            "value": "${{ github.ref_name }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Event Name",
+                            "value": "${{ github.event_name }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Commit",
+                            "value": "${{ github.event.head_commit.message }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Author",
+                            "value": "${{ github.actor }}",
+                            "short": true
+                        },
+                        {
+                            "title": "Triggered By",
+                            "value": "${{ github.triggering_actor }}",
+                            "short": true
+                        }
+                    ]
+                }
+            ]
+        }'
